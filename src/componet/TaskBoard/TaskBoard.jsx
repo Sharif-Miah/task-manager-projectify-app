@@ -49,18 +49,48 @@ const TaskBoard = () => {
 
   const [tasks, setTasks] = useState(initialTask);
   const [isOpenModal, setIsOpenModal] = useState(false);
+  const [updateTask, setUpdateTask] = useState(null);
 
-  const handleOpenModal = () => {
+  // Add TO TASK ABD UPDATA TASK
+
+  const handleOnTask = (newTask, isAdd) => {
+    event.preventDefault();
+
+    if (isAdd) {
+      setTasks([...tasks, newTask]);
+    } else {
+      tasks.map((task) => {
+        if (task.id === newTask.id) {
+          return newTask;
+        } else {
+          return task;
+        }
+      });
+    }
+
+    setIsOpenModal(false);
+  };
+
+  // DELETE A TASK
+
+  const handleDeleteTask = (taskId) => {
+    const deleteTask = tasks.filter((task) => task.id !== taskId);
+    setTasks(deleteTask);
+  };
+
+  // EDIT A TASK
+
+  const hanlseEditTask = (task) => {
+    setUpdateTask(task);
+    console.log(task);
     setIsOpenModal(true);
   };
 
-  const handleOnTask = (newTask) => {
-    event.preventDefault();
+  // OPEN MODAL
 
-    console.log(newTask);
-
-    setTasks([...tasks, newTask]);
-    setIsOpenModal(false);
+  const handleOpenModal = () => {
+    setIsOpenModal(true);
+    setUpdateTask(null);
   };
 
   return (
@@ -69,16 +99,33 @@ const TaskBoard = () => {
         <AddTaskModal
           onCreateTask={handleOnTask}
           onCencelModal={() => setIsOpenModal(false)}
+          updateTask={updateTask}
         />
       )}
       <div className="mx-auto max-w-7xl p-6">
         <TaskAddButton onModal={handleOpenModal} />
 
         <div className="-mx-2 mb-6 flex flex-wrap">
-          <TodoList tasks={tasks} />
-          <OnProgressList tasks={tasks} />
-          <DoneList tasks={tasks} />
-          <ReviseList tasks={tasks} />
+          <TodoList
+            tasks={tasks}
+            onDelete={handleDeleteTask}
+            onEdit={hanlseEditTask}
+          />
+          <OnProgressList
+            tasks={tasks}
+            onDelete={handleDeleteTask}
+            onEdit={hanlseEditTask}
+          />
+          <DoneList
+            tasks={tasks}
+            onDelete={handleDeleteTask}
+            onEdit={hanlseEditTask}
+          />
+          <ReviseList
+            tasks={tasks}
+            onDelete={handleDeleteTask}
+            onEdit={hanlseEditTask}
+          />
         </div>
       </div>
     </div>

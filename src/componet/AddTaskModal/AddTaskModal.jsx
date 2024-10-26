@@ -1,7 +1,8 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import { useState } from "react";
 
-const AddTaskModal = ({ onCencelModal, onCreateTask }) => {
+const AddTaskModal = ({ onCencelModal, onCreateTask, updateTask }) => {
   const [task, setTask] = useState({
     id: crypto.randomUUID(),
     taskName: "",
@@ -9,6 +10,8 @@ const AddTaskModal = ({ onCencelModal, onCreateTask }) => {
     date: "",
     type: "todo",
   });
+
+  const [isAdd, setIsAdd] = useState(Object.is(updateTask, null));
 
   const handleOnChange = (e) => {
     const name = e.target.name;
@@ -26,7 +29,7 @@ const AddTaskModal = ({ onCencelModal, onCreateTask }) => {
         <div className="w-full max-w-md rounded-lg bg-gray-800 shadow-xl">
           <div className="p-6">
             <h2 className="mb-6 text-2xl font-bold text-green-400">
-              Create Task
+              {isAdd ? "Create Task" : "Edit Task"}
             </h2>
             <form>
               <div className="mb-4">
@@ -111,7 +114,7 @@ const AddTaskModal = ({ onCencelModal, onCreateTask }) => {
                 <button
                   type="submit"
                   className="rounded-md border border-transparent bg-green-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 focus:ring-offset-gray-800"
-                  onClick={() => onCreateTask(task)}
+                  onClick={() => onCreateTask(task, isAdd)}
                 >
                   Create Task
                 </button>
