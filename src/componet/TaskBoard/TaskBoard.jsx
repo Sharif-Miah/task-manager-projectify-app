@@ -93,9 +93,21 @@ const TaskBoard = () => {
     setUpdateTask(null);
   };
 
+  // CLOSE MODEL
+
   const handleColseModal = () => {
     setIsOpenModal(false);
     setUpdateTask(null);
+  };
+
+  // SEARCH IMPLEMENT
+
+  const handleSearchTerm = (searchTerm) => {
+    const searchValue = tasks.filter((task) =>
+      task.taskName.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+
+    setTasks([...searchValue]);
   };
 
   return (
@@ -108,7 +120,7 @@ const TaskBoard = () => {
         />
       )}
       <div className="mx-auto max-w-7xl p-6">
-        <TaskAddButton onModal={handleOpenModal} />
+        <TaskAddButton onModal={handleOpenModal} onSearch={handleSearchTerm} />
 
         <div className="-mx-2 mb-6 flex flex-wrap">
           <TodoList

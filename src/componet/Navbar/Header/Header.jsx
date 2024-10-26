@@ -1,6 +1,14 @@
-import React from "react";
+/* eslint-disable react/prop-types */
+import { useState } from "react";
 
-const Header = () => {
+const Header = ({ onSearch }) => {
+  const [serchTerm, setSerchTerm] = useState("");
+
+  const handleSerchTerm = (event) => {
+    event.preventDefault();
+    onSearch(serchTerm);
+  };
+
   return (
     <header className="flex items-center justify-between bg-gray-800 p-4">
       <button className="lg:hidden">
@@ -22,9 +30,17 @@ const Header = () => {
       <div className="mx-4 flex-1">
         <input
           type="text"
+          value={serchTerm}
+          onChange={() => setSerchTerm(event.target.value)}
           placeholder="Search here"
           className="w-full max-w-xl rounded-full bg-gray-700 px-4 py-2 text-white focus:outline-none"
         />
+        <button
+          className="text-white bg-[#22c55e] font-semibold text-md py-[2px] -ml-[104px] mt-[4px] px-5 rounded-full"
+          onClick={() => handleSerchTerm()}
+        >
+          Search
+        </button>
       </div>
       <div className="flex items-center">
         <button className="relative mr-4">
