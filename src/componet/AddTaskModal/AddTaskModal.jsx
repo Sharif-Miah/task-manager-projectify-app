@@ -7,7 +7,7 @@ const AddTaskModal = ({ onCencelModal, onCreateTask }) => {
     taskName: "",
     description: "",
     date: "",
-    category: "",
+    type: "todo",
   });
 
   const handleOnChange = (e) => {
@@ -88,15 +88,15 @@ const AddTaskModal = ({ onCencelModal, onCreateTask }) => {
                 </label>
                 <select
                   id="category"
-                  name="category"
-                  value={task.category}
+                  name="type"
+                  value={task.type}
                   onChange={handleOnChange}
                   className="w-full rounded-md border border-gray-600 bg-gray-700 px-3 py-2 text-white shadow-sm focus:border-green-500 focus:outline-none focus:ring-2 focus:ring-green-500"
                 >
                   <option value="todo">To-Do</option>
                   <option value="inprogress">On Progress</option>
                   <option value="done">Done</option>
-                  <option value="revised">Revised</option>
+                  <option value="revise">Revised</option>
                 </select>
               </div>
 
