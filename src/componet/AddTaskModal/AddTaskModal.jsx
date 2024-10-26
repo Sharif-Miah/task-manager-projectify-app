@@ -1,4 +1,5 @@
-const AddTaskModal = () => {
+/* eslint-disable react/prop-types */
+const AddTaskModal = ({ onCencelModal }) => {
   return (
     <>
       <div className="flex min-h-screen items-center justify-center bg-gray-900 p-4 text-white   bg-opacity-70 absolute w-full h-full top-0 left-0 z-10">
@@ -75,6 +76,7 @@ const AddTaskModal = () => {
                 <button
                   type="button"
                   className="rounded-md border border-gray-600 px-4 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 focus:ring-offset-gray-800"
+                  onClick={onCencelModal}
                 >
                   Cancel
                 </button>
