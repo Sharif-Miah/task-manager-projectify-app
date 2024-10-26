@@ -13,24 +13,63 @@ const TaskBoard = () => {
     return today.toLocaleDateString("en-US", options);
   };
 
-  const initialTask = {
-    id: crypto.randomUUID(),
-    taskName: "Content Writer",
-    description: "Prepare proctor for client meeting",
-    date: getCurrentDate(),
-  };
+  const initialTask = [
+    {
+      id: crypto.randomUUID(),
+      taskName: "Content Writer",
+      description: "Prepare proctor for client meeting",
+      date: getCurrentDate(),
+      type: "todo",
+    },
 
-  const [tasks, setTasks] = useState([initialTask]);
+    {
+      id: crypto.randomUUID(),
+      taskName: "Content Writer",
+      description: "Prepare proctor for client meeting",
+      date: getCurrentDate(),
+      type: "inprogress",
+    },
+
+    {
+      id: crypto.randomUUID(),
+      taskName: "Content Writer",
+      description: "Prepare proctor for client meeting",
+      date: getCurrentDate(),
+      type: "done",
+    },
+
+    {
+      id: crypto.randomUUID(),
+      taskName: "Content Writer",
+      description: "Prepare proctor for client meeting",
+      date: getCurrentDate(),
+      type: "revise",
+    },
+  ];
+
+  const [tasks, setTasks] = useState(initialTask);
   const [isOpenModal, setIsOpenModal] = useState(false);
 
   const handleOpenModal = () => {
     setIsOpenModal(true);
   };
 
+  const handleOnTask = (newTask) => {
+    event.preventDefault();
+
+    console.log(newTask);
+
+    setTasks([...tasks, newTask]);
+    setIsOpenModal(false);
+  };
+
   return (
     <div>
       {isOpenModal && (
-        <AddTaskModal onCencelModal={() => setIsOpenModal(false)} />
+        <AddTaskModal
+          onCreateTask={handleOnTask}
+          onCencelModal={() => setIsOpenModal(false)}
+        />
       )}
       <div className="mx-auto max-w-7xl p-6">
         <TaskAddButton onModal={handleOpenModal} />
