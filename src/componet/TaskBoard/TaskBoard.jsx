@@ -93,12 +93,17 @@ const TaskBoard = () => {
     setUpdateTask(null);
   };
 
+  const handleColseModal = () => {
+    setIsOpenModal(false);
+    setUpdateTask(null);
+  };
+
   return (
     <div>
       {isOpenModal && (
         <AddTaskModal
           onCreateTask={handleOnTask}
-          onCencelModal={() => setIsOpenModal(false)}
+          onCencelModal={handleColseModal}
           updateTask={updateTask}
         />
       )}
