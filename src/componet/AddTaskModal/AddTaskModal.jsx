@@ -3,13 +3,15 @@
 import { useState } from "react";
 
 const AddTaskModal = ({ onCencelModal, onCreateTask, updateTask }) => {
-  const [task, setTask] = useState({
-    id: crypto.randomUUID(),
-    taskName: "",
-    description: "",
-    date: "",
-    type: "todo",
-  });
+  const [task, setTask] = useState(
+    updateTask || {
+      id: crypto.randomUUID(),
+      taskName: "",
+      description: "",
+      date: "",
+      type: "todo",
+    }
+  );
 
   const [isAdd, setIsAdd] = useState(Object.is(updateTask, null));
 
