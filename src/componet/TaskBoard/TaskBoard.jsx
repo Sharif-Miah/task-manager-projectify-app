@@ -59,13 +59,15 @@ const TaskBoard = () => {
     if (isAdd) {
       setTasks([...tasks, newTask]);
     } else {
-      tasks.map((task) => {
+      const update = tasks.map((task) => {
         if (task.id === newTask.id) {
           return newTask;
         } else {
           return task;
         }
       });
+      console.log(update);
+      setTasks(update);
     }
 
     setIsOpenModal(false);
